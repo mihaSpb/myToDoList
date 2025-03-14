@@ -1,25 +1,38 @@
-from to_do_list import *
+from to_do_list import ToDoList
+
+
+def menu():
+    todo_list = ToDoList()
+    actions = {
+        "1": ("Добавить задачу", todo_list.add_task),
+        "2": ("Отметить задачу как выполненную", todo_list.complete_task),
+        "3": ("Удалить задачу", todo_list.remove_task),
+        "4": ("Показать список задач", todo_list.list_tasks),
+        "5": ("Выйти", None)
+    }
+
+    while True:
+        print("\nМеню:")
+        for key, item in actions.items():
+            description = item[0]
+            print(f"{key}: {description}")
+
+        choice = input(f"\nВыберите действие: ")
+
+        if choice == "5":
+            print("Выход из программы.")
+            break
+        elif choice in actions:
+            action = actions[choice][1]
+            if action in [todo_list.add_task, todo_list.complete_task, todo_list.remove_task]:
+                task = input("Введите описание задачи: ")
+                action(task)
+            else:
+                action()
+        else:
+            print("Неверный выбор. Пожалуйста, выберите действие из меню.")
+
 
 
 if __name__ == '__main__':
-    todo = ToDoList()
-    todo.add_task("Сделать домашнее задание")
-    todo.add_task("Написать текст")
-    todo.add_task("Отправить задание на проверку")
-
-    todo.list_tasks()
-
-    print("\nЗадача выполнена 'Сделать домашнее задание'")
-    todo.complete_task("Сделать домашнее задание")
-    todo.list_tasks()
-
-    print("\nУдаляем выполненную задачу 'Сделать домашнее задание'")
-    todo.remove_task("Сделать домашнее задание")
-    todo.list_tasks()
-
-    print("\nОтмечаем несуществующую задачу 'Заказать воду':")
-    todo.complete_task("Заказать воду")
-
-    print("\nДобавляем существующую задачу 'Написать текст':")
-    todo.add_task("Написать текст")
-    todo.list_tasks()
+    menu()
