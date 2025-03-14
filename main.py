@@ -1,7 +1,7 @@
 from to_do_list import *
 
 
-def main():
+if __name__ == '__main__':
     todo = ToDoList()
     todo.add_task("Сделать домашнее задание")
     todo.add_task("Написать текст")
@@ -23,6 +23,3 @@ def main():
     print("\nДобавляем существующую задачу 'Написать текст':")
     todo.add_task("Написать текст")
     todo.list_tasks()
-
-
-main()
